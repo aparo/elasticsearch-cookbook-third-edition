@@ -1,4 +1,3 @@
-#curl -XHEAD 'http://127.0.0.1:9200/myindex?pretty=true'
 curl -XDELETE 'http://127.0.0.1:9200/myindex?pretty=true'
 curl -XPUT 'http://127.0.0.1:9200/myindex?pretty=true' -d  '{"mappings": {"test-type": {"properties": {"pos": {"type": "integer", "store": "yes"}, "uuid": {"store": "yes", "type": "keyword"}, "parsedtext": {"term_vector": "with_positions_offsets",  "store": "yes", "type": "text"}, "name": {"term_vector": "with_positions_offsets",  "store": "yes", "type": "text"}, "title": {"term_vector": "with_positions_offsets",  "store": "yes", "type": "text"}}}}}'
 curl -XPUT 'http://127.0.0.1:9200/myindex/test-type/1?pretty=true' -d '{"position": 1, "parsedtext": "Joe Testere nice guy", "name": "Joe Tester", "uuid": "11111", "price":4.0}'
