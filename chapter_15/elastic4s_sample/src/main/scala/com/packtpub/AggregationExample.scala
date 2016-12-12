@@ -13,10 +13,10 @@ object AggregationExample extends App with ElasticSearchClientTrait {
 
   val resp = client.execute {
     search(indexName / typeName) size 0 aggregations (
-      termsAggregation("tag") size 100 subAggregations(
-        extendedStatsAggregation("price") field "price",
-        extendedStatsAggregation("size") field "size",
-        geoBoundsAggregation("centroid") field "location"
+      termsAggregation("tag") field "tag" size 100 subAggregations(
+        extendedStatsAggregation("price") field "price"
+        , extendedStatsAggregation("size") field "size"
+        ,geoBoundsAggregation("centroid") field "location"
       ))
   }.await
 
@@ -26,7 +26,7 @@ println(s"Result Hits: ${resp.size}")
 println(s"number of tags: ${tagsAgg.getBuckets.size()}")
 println(s"max price of first tag ${tagsAgg.getBuckets.head.getKey}: ${tagsAgg.getBuckets.head.getAggregations.get[InternalExtendedStats]("price").value("max")}")
 println(s"min size of first tag ${tagsAgg.getBuckets.head.getKey}: ${tagsAgg.getBuckets.head.getAggregations.get[InternalExtendedStats]("size").value("min")}")
-println(s"center of first tag ${tagsAgg.getBuckets.head.getKey}: ${tagsAgg.getBuckets.head.getAggregations.get[InternalGeoCentroid]("centroid").centroid()}")
+//println(s"center of first tag ${tagsAgg.getBuckets.head.getKey}: ${tagsAgg.getBuckets.head.getAggregations.get[InternalGeoCentroid]("centroid").centroid()}")
 
   client.execute(deleteIndex(indexName)).await
 
