@@ -1,8 +1,6 @@
 curl -XGET http://127.0.0.1:9200/test-mindex/_search -d '{
     "query": {
-        "filtered": {
-            "filter": {
-                "geo_bounding_box": {
+                "geo_polygon": {
                     "pin.location": {
                         "points": [
                             {
@@ -20,10 +18,5 @@ curl -XGET http://127.0.0.1:9200/test-mindex/_search -d '{
                         ]
                     }
                 }
-            },
-            "query": {
-                "match_all": {}
             }
-        }
-    }
 }'

@@ -19,7 +19,7 @@ def create_and_add_mapping(connection, index_name, type_name):
             "required": True
         },
         "properties": {
-            "name": {"type": "text", "store": "yes", "term_vector": "with_positions_offsets", "fielddata": "true"},
+            "name": {"type": "text", "store": "true", "term_vector": "with_positions_offsets", "fielddata": "true"},
             "value": {
                 "type": "text"
             }
@@ -27,14 +27,14 @@ def create_and_add_mapping(connection, index_name, type_name):
     }})
 
     connection.indices.put_mapping(index=index_name, doc_type=type_name, body={type_name:{"properties": {
-    "uuid": {"type": "keyword", "store": "yes"},
-    "title": {"type": "text", "store": "yes", "term_vector": "with_positions_offsets"},
-    "parsedtext": { "type": "text", "store": "yes", "term_vector": "with_positions_offsets", "fielddata": "true"},
-    "nested": {"type": "nested", "properties": {"num": {"type": "integer", "store": "yes"},
-                                                "name": {"type": "keyword", "store": "yes"},
-                                                "value": {"type": "keyword", "store": "yes"}}},
-    "date": {"type": "date", "store": "yes"},
-    "position": {"type": "integer", "store": "yes"},
+    "uuid": {"type": "keyword", "store": "true"},
+    "title": {"type": "text", "store": "true", "term_vector": "with_positions_offsets"},
+    "parsedtext": { "type": "text", "store": "true", "term_vector": "with_positions_offsets", "fielddata": "true"},
+    "nested": {"type": "nested", "properties": {"num": {"type": "integer", "store": "true"},
+                                                "name": {"type": "keyword", "store": "true"},
+                                                "value": {"type": "keyword", "store": "true"}}},
+    "date": {"type": "date", "store": "true"},
+    "position": {"type": "integer", "store": "true"},
     "name": {"type": "text", "store": "yes", "term_vector": "with_positions_offsets", "fielddata": "true"}}}})
 
 

@@ -1,7 +1,5 @@
 curl -XGET http://127.0.0.1:9200/test-mindex/_search -d '{
     "query": {
-        "filtered": {
-            "filter": {
                 "geo_bounding_box": {
                     "pin.location": {
                         "bottom_right": {
@@ -14,10 +12,6 @@ curl -XGET http://127.0.0.1:9200/test-mindex/_search -d '{
                         }
                     }
                 }
-            },
-            "query": {
-                "match_all": {}
             }
-        }
-    }
+    
 }'

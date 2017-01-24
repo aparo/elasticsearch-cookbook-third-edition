@@ -1,5 +1,7 @@
-#curl -XDELETE 'http://127.0.0.1:9200/test-index?pretty=true'
-#curl  -H "Accept: application/json"   -H "X-HTTP-Method-Override: PUT" -XPOST 'http://127.0.0.1:9200/test-index?pretty=true' -d  @mapping.json
+curl -XDELETE 'http://127.0.0.1:9200/test-index?pretty=true'
+#curl  -H "Accept: application/json"   -H "X-HTTP-Method-Override: PUT" -XPUT 'http://127.0.0.1:9200/test-index/_mapping?pretty=true' -d  @mapping.json
+
+curl  -XPUT 'http://127.0.0.1:9200/test-index?pretty=true' -d  @mapping.json
 
 curl -XPUT 'http://127.0.0.1:9200/test-index/test-type2/_mapping?pretty=true' -d '{"test-type2": {"_parent": {"type": "test-type"}}}'
 curl -XPUT 'http://127.0.0.1:9200/test-index/test-type/1?pretty=true' -d '{"position": 1, "parsedtext": "Joe Testere nice guy", "name": "Joe Tester", "uuid": "11111", "price":4.0, "versions":[{"color":"yellow", "size":5},{"color":"blue", "size":15}]}'
